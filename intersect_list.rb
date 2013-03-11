@@ -1,4 +1,5 @@
 require 'benchmark'
+require 'ostruct'
 
 #Passage from 'A Tale of Two Cities' by Charles Dickens
 documents = ["Its abiding place was in all things fitted to it. A narrow winding
@@ -44,13 +45,22 @@ def pre_process(documents)
 		end
 	end
 
-	puts dictionary
+	dictionary
+
 end
 
-def create_inverted_index(dictionary)
-	index_hash = {}
-	dictionary.each do |record|
-		
-	end
+def index(dictionary)
+  inverted_index_hash = {}
+  dictionary.each do |record|
+    postings_list = inverted_index_hash[record.term] || []
+    postings_list << record.doc_id
+    inverted_index_hash[record.term] = postings_list.sort.uniq
+  end
+  puts inverted_index_hash
 end
+ 
 
+initial_dictionary = pre_process(documents)
+index(initial_dictionary)
+
+ 
