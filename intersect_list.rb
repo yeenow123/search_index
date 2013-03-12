@@ -50,17 +50,17 @@ def pre_process(documents)
 end
 
 def index(dictionary)
-  inverted_index_hash = {}
-  dictionary.each do |record|
-    postings_list = inverted_index_hash[record.term] || []
-    postings_list << record.doc_id
-    inverted_index_hash[record.term] = postings_list.sort.uniq
-  end
-  puts inverted_index_hash
+	inverted_index_hash = {}
+	dictionary.each do |record|
+		postings_list = inverted_index_hash[record[:term]] || []
+		postings_list.push(record[:doc_id]) 
+		inverted_index_hash[record[:term]] = postings_list.uniq		
+	end
+	inverted_index_hash
 end
  
 
 initial_dictionary = pre_process(documents)
-index(initial_dictionary)
+puts index(initial_dictionary)
 
  
