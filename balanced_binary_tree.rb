@@ -1,10 +1,9 @@
 class BalancedBinaryTree
 	attr_accessor :root
 	class Node
-		attr_accessor :data, :left, :right, :count
+		attr_accessor :data, :left, :right
 		def initialize(data, left=nil, right=nil)
 			@data, @left, @right = data, left, right
-			@count = 0
 		end
 		
 		def size
@@ -57,12 +56,6 @@ class BalancedBinaryTree
 	end
 end
 
-@tree = BalancedBinaryTree.new
-x = 1
-10000.times do |x|
-	@tree.insert(x, @tree.root)
-	x += 1
-end
 
 
 
