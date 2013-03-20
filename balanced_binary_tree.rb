@@ -29,7 +29,7 @@ class BalancedBinaryTree
 		@root = nil
 	end
 
-	def insert(data, node)
+	def insert(data, node=@root)
 		return @root = Node.new(data) if @root.nil?
 
 		case data <=> node.data
@@ -43,16 +43,27 @@ class BalancedBinaryTree
 	end
 
 	def sorted_linked_list
-		@list = []
+		list = []
 		@root.each do |node|
-			@list.push(node.data)
+			list.push(node.data)
 		end
-		find_mid(@list)
+		list
 	end
 
 	def find_mid(sorted_arr)
-		mid = (sorted_arr.size / 2).to_i
-		return sorted_arr[mid]
+		mid = ((sorted_arr.size - 1) / 2).to_i
+		return mid
+	end
+
+	def balance
+		list = sorted_linked_list
+		mid = find_mid(list)
+		@root = nil
+
+		self.insert(list.delete_at(mid))
+		list.each do |i|
+			self.insert(i)
+		end
 	end
 end
 
