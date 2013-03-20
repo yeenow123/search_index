@@ -70,13 +70,14 @@ describe BalancedBinaryTree do
 			it { should == 4 }
 		end
 
-		describe "rebuilding into a balanced tree" do
+		describe "the rebalanced tree" do
 			before do
 				@tree.balance
 			end
-			subject { @tree.root }
 
-			its(:data) { should == 5}
+			it "should have a root with the median of the numbers" do
+				@tree.root.data.should eql(5)
+			end
 		end
 	end
 end
